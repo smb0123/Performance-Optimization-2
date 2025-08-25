@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "./components/Header";
 import InfoTable from "./components/InfoTable";
@@ -10,9 +10,12 @@ const LazyImageModal = React.lazy(() => import("./components/ImageModal"));
 function App() {
   const [showModal, setShowModal] = useState(false);
 
-  const handleMouseEnter = () => {
+  useEffect(() => {
     const ImageModal = import("./components/ImageModal");
-  };
+    const img = new Image();
+    img.src =
+      "https://stillmed.olympic.org/media/Photos/2016/08/20/part-1/20-08-2016-Football-Men-01.jpg?interpolation=lanczos-none&resize=*:800";
+  }, []);
 
   return (
     <div className="App">
@@ -22,7 +25,6 @@ function App() {
         onClick={() => {
           setShowModal(true);
         }}
-        onMouseEnter={handleMouseEnter}
       >
         올림픽 사진 보기
       </ButtonModal>
